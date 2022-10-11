@@ -210,6 +210,8 @@ func (rq *queryBox) parseFilter(f *FilterItem) string {
 		operator = "<"
 	case "or":
 		operator = "or"
+	case "like":
+		operator = "like"
 	case "is null":
 		return fmt.Sprintf("%s IS NULL", f.Field)
 	case "is not null":
