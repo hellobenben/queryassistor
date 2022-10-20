@@ -263,6 +263,8 @@ func isEmpty(v reflect.Value) bool {
 		return v.String() == ""
 	case reflect.Slice:
 		return v.Len() == 0
+	case reflect.Ptr:
+		return v.IsNil()
 	}
 	return false
 }
