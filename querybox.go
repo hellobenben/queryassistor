@@ -225,7 +225,11 @@ func (rq *queryBox) parseFilter(f *FilterItem) string {
 	kind := reflect.TypeOf(f.Value).Kind()
 	switch kind {
 	case reflect.Ptr:
-		sub := subToQuery(reflect.ValueOf(f.Value).Interface().(*SubQuery))
+		sq, ok := reflect.ValueOf(f.Value).Interface().(*SubQuery)
+		if !ok {
+			break
+		}
+		sub := subToQuery(sq)
 		sql := rq.toSql(sub)
 		return fmt.Sprintf("%s %s (%s)", f.Field, operator, sql)
 	}
