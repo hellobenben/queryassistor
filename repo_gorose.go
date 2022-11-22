@@ -15,10 +15,10 @@ type goroseIml struct {
 func (*goroseIml) row(q *Query, sql string, values []interface{}) (map[string]interface{}, error) {
 	var orm gorose.IOrm
 	ds := q.Datasource
-	if ds == "mysql" {
-		orm = mysql()
-	} else if ds == "clickhouse" {
-		orm = clickhouse()
+	if ds == "Mysql" {
+		orm = Mysql()
+	} else if ds == "ClickHouse" {
+		orm = ClickHouse()
 	}
 	data, err := orm.Query(sql, values...)
 	if err != nil {
@@ -43,10 +43,10 @@ func (*goroseIml) Rows(qb *queryBox) ([]map[string]interface{}, error) {
 	sql := qb.ToSql()
 	var orm gorose.IOrm
 	ds := qb.Query.Datasource
-	if ds == "mysql" {
-		orm = mysql()
-	} else if ds == "clickhouse" {
-		orm = clickhouse()
+	if ds == "Mysql" {
+		orm = Mysql()
+	} else if ds == "ClickHouse" {
+		orm = ClickHouse()
 	}
 	data, err := orm.Query(sql, qb.BindValues...)
 	if err != nil {
@@ -70,10 +70,10 @@ func (*goroseIml) Page(qb *queryBox) ([]map[string]interface{}, int64, error) {
 
 	var orm gorose.IOrm
 	ds := qb.Query.Datasource
-	if ds == "mysql" {
-		orm = mysql()
-	} else if ds == "clickhouse" {
-		orm = clickhouse()
+	if ds == "Mysql" {
+		orm = Mysql()
+	} else if ds == "ClickHouse" {
+		orm = ClickHouse()
 	}
 	totalRow, err := orm.Query(countSql, qb.BindValues...)
 	if err != nil {
@@ -112,10 +112,10 @@ func (*goroseIml) total(qb *queryBox) (int64, error) {
 
 	var orm gorose.IOrm
 	ds := qb.Query.Datasource
-	if ds == "mysql" {
-		orm = mysql()
-	} else if ds == "clickhouse" {
-		orm = clickhouse()
+	if ds == "Mysql" {
+		orm = Mysql()
+	} else if ds == "ClickHouse" {
+		orm = ClickHouse()
 	}
 	totalRow, err := orm.Query(countSql, qb.BindValues...)
 	if err != nil {

@@ -35,13 +35,13 @@ func Initialize(configure Configure) {
 	iml = &goroseIml{}
 }
 
-func mysql() gorose.IOrm {
+func Mysql() gorose.IOrm {
 	mysqlGRoseOnce.Do(func() {
 		dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=true&loc=Local",
 			config.Mysql.User, config.Mysql.Password, config.Mysql.Host, config.Mysql.Port, config.Mysql.DBName)
 		var err error
 		mysqlEngin, err = gorose.Open(&gorose.Config{
-			Driver: "mysql",
+			Driver: "Mysql",
 			Dsn:    dsn,
 		})
 		if err != nil {
@@ -51,7 +51,7 @@ func mysql() gorose.IOrm {
 	return mysqlEngin.NewOrm()
 }
 
-func clickhouse() gorose.IOrm {
+func ClickHouse() gorose.IOrm {
 	clickhouseOnce.Do(func() {
 		dsn := fmt.Sprintf("tcp://%s:%s/?username=%s&password=%s&database=%s&debug=%t",
 			config.ClickHouse.Host,
@@ -63,7 +63,7 @@ func clickhouse() gorose.IOrm {
 		)
 		var err error
 		clickhouseEngin, err = gorose.Open(&gorose.Config{
-			Driver: "clickhouse",
+			Driver: "ClickHouse",
 			Dsn:    dsn,
 		})
 		if err != nil {
