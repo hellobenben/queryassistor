@@ -41,7 +41,7 @@ func Mysql() gorose.IOrm {
 			config.Mysql.User, config.Mysql.Password, config.Mysql.Host, config.Mysql.Port, config.Mysql.DBName)
 		var err error
 		mysqlEngin, err = gorose.Open(&gorose.Config{
-			Driver: "Mysql",
+			Driver: "mysql",
 			Dsn:    dsn,
 		})
 		if err != nil {
@@ -63,7 +63,7 @@ func ClickHouse() gorose.IOrm {
 		)
 		var err error
 		clickhouseEngin, err = gorose.Open(&gorose.Config{
-			Driver: "ClickHouse",
+			Driver: "clickhouse",
 			Dsn:    dsn,
 		})
 		if err != nil {
