@@ -18,7 +18,7 @@ func (*goroseIml) row(q *Query, sql string, values []interface{}) (map[string]in
 	ds := q.Datasource
 	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if strings.ToLower(ds) == "clickHouse" {
+	} else if strings.ToLower(ds) == "clickhouse" {
 		orm = ClickHouse()
 	}
 	data, err := orm.Query(sql, values...)
@@ -46,7 +46,7 @@ func (*goroseIml) Rows(qb *queryBox) ([]map[string]interface{}, error) {
 	ds := qb.Query.Datasource
 	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if strings.ToLower(ds) == "clickHouse" {
+	} else if strings.ToLower(ds) == "clickhouse" {
 		orm = ClickHouse()
 	}
 	data, err := orm.Query(sql, qb.BindValues...)
@@ -73,7 +73,7 @@ func (*goroseIml) Page(qb *queryBox) ([]map[string]interface{}, int64, error) {
 	ds := qb.Query.Datasource
 	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if strings.ToLower(ds) == "clickHouse" {
+	} else if strings.ToLower(ds) == "clickhouse" {
 		orm = ClickHouse()
 	}
 	totalRow, err := orm.Query(countSql, qb.BindValues...)
@@ -115,7 +115,7 @@ func (*goroseIml) total(qb *queryBox) (int64, error) {
 	ds := qb.Query.Datasource
 	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if strings.ToLower(ds) == "clickHouse" {
+	} else if strings.ToLower(ds) == "clickhouse" {
 		orm = ClickHouse()
 	}
 	totalRow, err := orm.Query(countSql, qb.BindValues...)
