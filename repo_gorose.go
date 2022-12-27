@@ -5,6 +5,7 @@ import (
 	"github.com/tealeg/xlsx"
 	"os"
 	"reflect"
+	"strings"
 	"time"
 )
 
@@ -15,9 +16,9 @@ type goroseIml struct {
 func (*goroseIml) row(q *Query, sql string, values []interface{}) (map[string]interface{}, error) {
 	var orm gorose.IOrm
 	ds := q.Datasource
-	if ds == "Mysql" {
+	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if ds == "ClickHouse" {
+	} else if strings.ToLower(ds) == "clickHouse" {
 		orm = ClickHouse()
 	}
 	data, err := orm.Query(sql, values...)
@@ -43,9 +44,9 @@ func (*goroseIml) Rows(qb *queryBox) ([]map[string]interface{}, error) {
 	sql := qb.ToSql()
 	var orm gorose.IOrm
 	ds := qb.Query.Datasource
-	if ds == "Mysql" {
+	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if ds == "ClickHouse" {
+	} else if strings.ToLower(ds) == "clickHouse" {
 		orm = ClickHouse()
 	}
 	data, err := orm.Query(sql, qb.BindValues...)
@@ -70,9 +71,9 @@ func (*goroseIml) Page(qb *queryBox) ([]map[string]interface{}, int64, error) {
 
 	var orm gorose.IOrm
 	ds := qb.Query.Datasource
-	if ds == "Mysql" {
+	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if ds == "ClickHouse" {
+	} else if strings.ToLower(ds) == "clickHouse" {
 		orm = ClickHouse()
 	}
 	totalRow, err := orm.Query(countSql, qb.BindValues...)
@@ -112,9 +113,9 @@ func (*goroseIml) total(qb *queryBox) (int64, error) {
 
 	var orm gorose.IOrm
 	ds := qb.Query.Datasource
-	if ds == "Mysql" {
+	if strings.ToLower(ds) == "mysql" {
 		orm = Mysql()
-	} else if ds == "ClickHouse" {
+	} else if strings.ToLower(ds) == "clickHouse" {
 		orm = ClickHouse()
 	}
 	totalRow, err := orm.Query(countSql, qb.BindValues...)
