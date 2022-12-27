@@ -235,17 +235,23 @@ func (rq *queryBox) parseFilter(f *FilterItem) string {
 	}
 
 	if operator == "IN" || operator == "NOT IN" {
+		var value []string
 		switch kind {
 		case reflect.String:
-			return fmt.Sprintf("%s %s (%s)", f.Field, operator, f.Value)
+			value = strings.Split(f.Value.(string), ",")
 		case reflect.Slice:
-			rq.BindValues = append(rq.BindValues, f.Value)
-			return fmt.Sprintf("%s %s (?)", f.Field, operator)
+			value = f.Value.([]string)
 		case reflect.Array:
-			rq.BindValues = append(rq.BindValues, f.Value)
-			return fmt.Sprintf("%s %s (?)", f.Field, operator)
+			value = f.Value.([]string)
 		}
-
+		var str string
+		for i, s := range value {
+			if i > 0 {
+				str += ","
+			}
+			str += fmt.Sprintf("'%s'", strings.Replace(s, "'", "", -1))
+		}
+		return fmt.Sprintf("%s %s (%s)", f.Field, operator, str)
 	} else {
 		rq.BindValues = append(rq.BindValues, f.Value)
 	}
