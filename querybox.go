@@ -145,6 +145,8 @@ func (rq *queryBox) parseJoin(query *Query) string {
 			joinType = "INNER JOIN"
 		case "CROSS":
 			joinType = "CROSS JOIN"
+		case "FULL OUTER":
+			joinType = "FULL OUTER JOIN"
 		case "":
 			joinType = ""
 		}
