@@ -218,6 +218,8 @@ func (rq *queryBox) parseFilter(f *FilterItem) string {
 		return fmt.Sprintf("%s IS NULL", f.Field)
 	case "is not null":
 		return fmt.Sprintf("%s IS NOT NULL", f.Field)
+	case "":
+		return fmt.Sprintf("%s", f.Field)
 	}
 
 	if len(operator) == 0 {
