@@ -73,6 +73,11 @@ func commandTimeFilter(q *queryBox, params []string, v reflect.Value) {
 	var operator string
 	value := v.Interface()
 
+	if len(v.String()) > 22 {
+		tm, _ := time.Parse(time.RFC3339, v.String())
+		value = tm.In(time.Local).Format("2006-01-02 15:04:05")
+	}
+
 	if len(params) >= 1 {
 		column = params[0]
 	}
