@@ -57,7 +57,7 @@ func (e *exporter) Export() (string, error) {
 	file = excelize.NewFile()
 	sheet1Existed := false
 	for _, st := range e.sheets {
-		_, _ = file.NewSheet(st.Name)
+		_ = file.NewSheet(st.Name)
 		if st.Name == "Sheet1" {
 			sheet1Existed = true
 		}
