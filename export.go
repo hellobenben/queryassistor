@@ -26,16 +26,18 @@ type exporter struct {
 	savePath string
 }
 
-/**
-lib.ReportService.New(func(options *lib.Options) {
-	options.Name = fmt.Sprintf("广告%s信息", cpx)
-	options.Title = []interface{}{"A","B"}
-	options.Data = [][]interface{}{{"1","2"},{"A","B"}}
-	options.Suffix = string(cpx)
-}).
+/*
+*
+
+	lib.ReportService.New(func(options *lib.Options) {
+		options.Name = fmt.Sprintf("广告%s信息", cpx)
+		options.Title = []interface{}{"A","B"}
+		options.Data = [][]interface{}{{"1","2"},{"A","B"}}
+		options.Suffix = string(cpx)
+	}).
+
 Report().
 Oss()
-
 */
 func newExporter(opt ExportOption) *exporter {
 	return &exporter{
@@ -55,7 +57,7 @@ func (e *exporter) Export() (string, error) {
 	file = excelize.NewFile()
 	sheet1Existed := false
 	for _, st := range e.sheets {
-		_ = file.NewSheet(st.Name)
+		_, _ = file.NewSheet(st.Name)
 		if st.Name == "Sheet1" {
 			sheet1Existed = true
 		}
