@@ -31,16 +31,17 @@ type ClickHouseConfigure struct {
 }
 
 type SubQuery struct {
-	Table     string
-	Filter    []FilterItem
-	Select    []SelectField
-	Group     string
-	Having    []FilterItem
-	Joins     []Join
-	Limit     int
-	Order     string
-	CountArgs string
-	Id        string
+	Table        string
+	Filter       []FilterItem
+	Select       []SelectField
+	Group        string
+	Having       []FilterItem
+	Joins        []Join
+	Limit        int
+	Order        string
+	CountArgs    string
+	Id           string
+	DisableAlias bool
 }
 
 type Query struct {

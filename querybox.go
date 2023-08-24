@@ -153,7 +153,12 @@ func (rq *queryBox) parseJoin(query *Query) string {
 		if j.SubQuery != nil {
 			q := subToQuery(j.SubQuery)
 			subSql := rq.toSql(q)
-			joinClause = fmt.Sprintf(" %s (%s) AS %s", joinType, subSql, q.Id)
+			if j.SubQuery.DisableAlias {
+				joinClause = fmt.Sprintf(" %s (%s)", joinType, subSql)
+			} else {
+				joinClause = fmt.Sprintf(" %s (%s) AS %s", joinType, subSql, q.Id)
+			}
+
 		} else {
 			joinClause = fmt.Sprintf(" %s %s", joinType, j.Table)
 		}
